@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{#主页#}
+{% block styles %}
+    {{ super() }}
+{% endblock %}
+
+{% block navbar %}
+        {{ super() }}
+{% endblock %}
+{% block newcontent %}
+<meta name="referrer" content="never">
+<div class="container container-fluid">
+    <div class="row">
+        <div class="col-xs-2">
+            <div class="list-group left-side">
+                <a class="list-group-item left-side-active" href="/">首页</a>
+                <a class="list-group-item" href="/keji">科技</a>
+                <a class="list-group-item" href="/dongman">动漫</a>
+                <a class="list-group-item" href="/tiyu">体育</a>
+                <a class="list-group-item" href="/yule">娱乐</a>
+                <a class="list-group-item" href="/guoji">国际</a>
+                <a class="list-group-item" href="/lishi">历史</a>
+            </div>
+        </div>
+
+        <div class="col-xs-8" id="news">
+            <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+    var user = {{ cat|tojson }};
+    console.log(user);
+$(document).ready(function(){
+	$(document).ready(function(){
+		$.post("http://127.0.0.1:5000/getdata",{
+			user:user['user'],
+            cat:user['cat'],
+			dataType:"jsonp"
+		},
+		function(data,status){
+		console.log(data);
+		for(var i=0;i<5;i++){
+            var testdiv = document.getElementById("news");
+			var html = document.getElementById("news").innerHTML;
+            testdiv.innerHTML=html + '<div class="media"><div class="media-left"><a href="#"><img height="180" width="240" onerror="this.src=\'static/test.jpg\'" class="media-object news-png" src="'+data[i]['data'][0]['headImageUrl']+'" alt="新闻图片"></a></div><div class="media-body"><h4><a class="media-heading" target="_Blank"  href="'+data[i]['data'][0]['url']+'">'+data[i]['data'][0]['title']+'</a></h4><div class="news-info"><span>'+data[i]['data'][0]['authorName']+'</span>.<span></span>.<span>'+data[i]['data'][0]['publishTime']+'</span></div></div></div>';
+		}
+		$(document).on("click","a",function(){
+		    var val = $(this).attr('href');
+		    var jsonData = JSON.stringify(val);// 转成JSON格式
+            var result = $.parseJSON(jsonData);// 转成JSON对象
+            $.post("http://127.0.0.1:7000/usermap",{
+			user:user['user'],
+            cat:user['cat'],
+            url:val,
+			dataType:"jsonp"
+		});
+            });
+		});
+	});
+});
+</script>
+
+<script type="text/javascript" >
+
+console.log("===加载更多数据===");
+var user = {{ cat|tojson }};
+console.log(user);
+window.onscroll=function(){
+    var a = document.documentElement.scrollTop==0? document.body.clientHeight : document.documentElement.clientHeight;
+    var b = document.documentElement.scrollTop==0? document.body.scrollTop : document.documentElement.scrollTop;
+    var c = document.documentElement.scrollTop==0? document.body.scrollHeight : document.documentElement.scrollHeight;
+        if(a+b==c){
+            $(document).ready(function(){
+	$(document).ready(function(){
+		$.post("http://127.0.0.1:5000/getdata",{
+			user:user['user'],
+            cat:user['cat'],
+			dataType:"jsonp"
+		},
+		function(data,status){
+		console.log(data);
+		for(var i=0;i<5;i++){
+var testdiv = document.getElementById("news");
+			var html = document.getElementById("news").innerHTML;
+            testdiv.innerHTML=html + '<div class="media"><div class="media-left"><a href="#"><img height="180" width="240" onerror="this.src=\'static/test.jpg\'" class="media-object news-png" src="'+data[i]['data'][0]['headImageUrl']+'" alt="新闻图片"></a></div><div class="media-body"><h4><a class="media-heading" target="_Blank"  href="'+data[i]['data'][0]['url']+'">'+data[i]['data'][0]['title']+'</a></h4><div class="news-info"><span>'+data[i]['data'][0]['authorName']+'</span>.<span></span>.<span>'+data[i]['data'][0]['publishTime']+'</span></div></div></div>';
+            }
+		});
+	});
+});
+        }
+
+}
+
+
+</script>
+
+        </div>
+        <div class="col-xs-2">
+            <div class="list-group hot-news">
+                <a href="#" class="list-group-item active">
+                    最热推荐
+                </a>
+                <a href="#" class="list-group-item">python最强</a>
+                <a href="#" class="list-group-item">westos最强</a>
+                <a href="#" class="list-group-item">php最强</a>
+                <a href="#" class="list-group-item">all 最强</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

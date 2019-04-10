@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{#登陆页面#}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}
+    登陆
+{% endblock %}
+{% block newcontent %}
+    <div class="container container-small">
+    <h1>登录
+        <small>没有账号？<a href="/register/">注册</a></small>
+    </h1>
+    {{ wtf.quick_form(form)}}
+    {# 将表单信息提交给login路由对应的函数进行处理, 并且提交信息的方式为post方法, 为了密码的安全性 #}
+   {% if message %}
+    <p style="color: red">{{ message }}</p>
+    {% endif %}
+</div>
+{% endblock %}
