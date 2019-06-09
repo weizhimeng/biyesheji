@@ -19,6 +19,9 @@ def run(cat):
     push_data(queue, mydb)
 
 if __name__ == '__main__':
+    queue = RedisQueue('shouye')
+    mydb = connect().news_keys
+    push_data(queue, mydb)
     # run('user')
-    for i in ['yule','keji','dongman','tiyu','guoji','lishi']:
-        run(i)
+    # for i in ['yule','keji','dongman','tiyu','guoji','lishi']:
+    #     run(i)

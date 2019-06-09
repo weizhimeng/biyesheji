@@ -1,7 +1,7 @@
 # -***coding=utf-8***-
 #接受浏览记录，更新用户关键词的值
 from flask import Flask,render_template,session,redirect,url_for,request,jsonify
-from tool.db import connect,find,findall,connect_user
+from tool.db import connect,find,findall,connect_user,connect_history
 import pymongo
 # user_db = connect().news_keys
 # user_db.ensure_index('url', unique=True)
@@ -21,6 +21,10 @@ def index():
     try:
         user = request.form['user']
         url = request.form['url']
+        user_history = connect_history()[user]
+        res = list(find(user_history, {'url': url}))
+        if res == []:
+            user_history.insert({'url': url})
         news_db = connect().news_keys
         print(url)
         data = list(find(news_db, {'url': url}))[0]['keywords']

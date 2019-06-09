@@ -1,5 +1,5 @@
 # -***coding=utf-8***-
-# zaj_forms.py,存放表单操作
+# 存放表单操作
 from flask_wtf import FlaskForm
 # 每个Web表单都由一个继承自FlaskForm的类表示
 from wtforms import StringField,PasswordField,SubmitField
@@ -60,3 +60,39 @@ class RegisterFrom(FlaskForm):
     submit = SubmitField(
         label='注册'
     )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

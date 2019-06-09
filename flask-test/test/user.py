@@ -61,10 +61,28 @@ from tool.cos_similar import compare
 #     "叙伊" : 0.109676766081651
 #                }
 
+# python = connect().python
+# user_map = {
+#     'python':20
+# }
+
 user_db = connect().users
 users = findall(user_db)
 news_keys = connect().news_keys
 datas = findall(news_keys)
+# count = 0
+# num = 0
+# for data in datas:
+#     value = data['keywords']
+#     count += 1
+#     # print(compare(user_map, value))
+#     print(count)
+#     if 'python' in list(value.keys()):
+#         num += 1
+#         print('*********{}*****'.format(num))
+#         python.insert(data)
+
+
 
 for user in users:
     username = user['username']
@@ -88,5 +106,5 @@ def fun(username):
                 recommend.insert(data)
 
 if __name__ == '__main__':
-    fun('root')
+    fun('kkkk')
 

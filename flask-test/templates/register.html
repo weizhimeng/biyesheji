@@ -13,8 +13,6 @@
         <small>没有账号？<a href="/register/">注册</a></small>
     </h1>
     {{ wtf.quick_form(form) }}
-
-
         <!--获取服务器传递给后台的变量message, jinja2模板引擎里面的语法-->
         {% if message %}
         <p style="color: red">{{ message }}</p>

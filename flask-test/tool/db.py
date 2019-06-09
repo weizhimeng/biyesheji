@@ -7,7 +7,7 @@ import pymysql
 #连接
 def connect():
     client = MongoClient('47.106.37.156', 27017)
-    db = client.test
+    db = client.main
     return db
 
 def connect_user():
@@ -18,6 +18,11 @@ def connect_user():
 def connect_recommend():
     client = MongoClient('47.106.37.156', 27017)
     db = client.recommend
+    return db
+
+def connect_history():
+    client = MongoClient('47.106.37.156', 27017)
+    db = client.history
     return db
 
 #查询

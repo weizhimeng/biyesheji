@@ -19,9 +19,12 @@ def index():
     queue = RedisQueue(user)
     results = []
     for i in range(5):
+        if queue.empty():
+            break
         result = queue.get()
         data = eval(result)
         results.append(data)
+
     print(len(results))
     return jsonify(results)
 

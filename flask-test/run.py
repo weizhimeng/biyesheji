@@ -39,6 +39,14 @@ def index():
         user = session['user']
     except:
         user = ''
+    return render_template('index.html',cat={'cat':'shouye','user':user})
+
+@app.route('/tuijian')
+def tuijian():
+    try:
+        user = session['user']
+    except:
+        user = ''
     return render_template('index.html',cat={'cat':'','user':user})
 @app.route('/own/<user>/')
 def own(user):
@@ -116,7 +124,8 @@ def register():
         # 用户提交的表单信息
         print(form.data)
         addUser(form.data['user'],form.data['passwd'])
-        return 'ok'
+        return redirect(url_for('index'))
+        # return 'ok'
     return  render_template('register.html', form=form)
 
 @app.route('/logout/')

@@ -3,9 +3,7 @@ import time
 import redis
 
 class RedisQueue():
-    """Simple Queue with Redis Backend"""
     def __init__(self, name, namespace='queue', **redis_kwargs):
-        """The default connection parameters are: host='localhost', port=6379, db=0"""
         self.__db= redis.Redis(**redis_kwargs, host='47.106.37.156', password='Xc199704')
         self.key = '%s:%s' %(namespace, name)
 
